@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use App\Http\Controllers\Controller;
+use App\Models\Countries;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CountriesController extends Controller
 {
@@ -12,7 +13,8 @@ class CountriesController extends Controller
      */
     public function index()
     {
-        //
+        $countries = Countries::all();
+        return view('administrator.countries.index', compact('countries'));
     }
 
     /**
@@ -20,7 +22,7 @@ class CountriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('administrator.countries.create');
     }
 
     /**
@@ -28,7 +30,11 @@ class CountriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:countries|max:255',
+        ]);
+        Countries::create($validatedData);
+        return redirect()->route('countries.index')->with('success', 'Countries added successfully!');
     }
 
     /**
@@ -44,7 +50,8 @@ class CountriesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $country = Countries::find($id);
+        return view('administrator.countries.edit', compact('country'));
     }
 
     /**
@@ -52,7 +59,11 @@ class CountriesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+        ]);
+        Countries::find($id)->update($validatedData);
+        return redirect('/administrator/countries')->with('success', 'Countries updated successfully!');
     }
 
     /**
@@ -60,6 +71,7 @@ class CountriesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Countries::find($id)->delete();
+        return redirect('/administrator/countries')->with('success', 'Countries deleted successfully!');
     }
 }

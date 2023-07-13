@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use App\Http\Controllers\Controller;
+use App\Models\Genres;
+use App\Models\Movies;
+use App\Models\Countries;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class MoviesController extends Controller
 {
@@ -12,7 +15,8 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        //
+        $movies = Movies::all();
+        return view('administrator.movies.index', compact('movies'));
     }
 
     /**
@@ -20,7 +24,9 @@ class MoviesController extends Controller
      */
     public function create()
     {
-        //
+        $countries = Countries::all();
+        $genres = Genres::all();
+        return view('administrator.movies.create', compact('countries', 'genres'));
     }
 
     /**
@@ -28,7 +34,18 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedata = $request->validate([
+            'title' => 'required',
+            'poster' => 'required',
+            'genres_id' => 'required',
+            'synopsis' => 'required',
+            'release_date' => 'required',
+            'countries_id' => 'required',
+            'rating' => 'required',
+        ]);
+
+        Movies::create($validatedata);
+        return redirect('administrator/movies')->with('success', 'Movie has been created');
     }
 
     /**
@@ -44,7 +61,10 @@ class MoviesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $movie = Movies::find($id);
+        $countries = Countries::all();
+        $genres = Genres::all();
+        return view('administrator.movies.edit', compact('movie', 'countries', 'genres'));
     }
 
     /**
@@ -52,7 +72,18 @@ class MoviesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedata = $request->validate([
+            'title' => 'required',
+            'poster' => 'required',
+            'genres_id' => 'required',
+            'synopsis' => 'required',
+            'release_date' => 'required',
+            'countries_id' => 'required',
+            'rating' => 'required',
+        ]);
+
+        Movies::where('id', $id)->update($validatedata);
+        return redirect('administrator/movies')->with('success', 'Movie has been updated');
     }
 
     /**
@@ -60,6 +91,7 @@ class MoviesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Movies::where('id', $id)->delete();
+        return redirect('administrator/movies')->with('success', 'Movie has been deleted');
     }
 }

@@ -3,12 +3,12 @@
     <div class="login-content">
         <a href="#" class="close">x</a>
         <h3>Login</h3>
-        <form method="post" action="#">
+        <form method="post" action="/login">
+            @csrf
             <div class="row">
-                <label for="username">
-                    Username:
-                    <input type="text" name="username" id="username" placeholder="Hugh Jackman"
-                        pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
+                <label for="email">
+                    Email:
+                    <input type="email" name="email" id="email" placeholder="email@email.com"  required="required" >
                 </label>
             </div>
 
@@ -16,7 +16,6 @@
                 <label for="password">
                     Password:
                     <input type="password" name="password" id="password" placeholder="******"
-                        pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                         required="required" />
                 </label>
             </div>
@@ -32,13 +31,6 @@
                 <button type="submit">Login</button>
             </div>
         </form>
-        <div class="row">
-            <p>Or via social</p>
-            <div class="social-btn-2">
-                <a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
-                <a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
-            </div>
-        </div>
     </div>
 </div>
 <!--end of login form popup-->
@@ -47,36 +39,28 @@
     <div class="login-content">
         <a href="#" class="close">x</a>
         <h3>sign up</h3>
-        <form method="post" action="#">
+        <form method="post" action="/signup">
+            @csrf
             <div class="row">
-                <label for="username-2">
-                    Username:
-                    <input type="text" name="username" id="username-2" placeholder="Hugh Jackman"
-                        pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
+                <label for="name-2">
+                    Name:
+                    <input type="text" name="name" id="name-2" placeholder="Hugh Jackman"
+                         required="required" />
                 </label>
             </div>
 
             <div class="row">
                 <label for="email-2">
                     your email:
-                    <input type="password" name="email" id="email-2" placeholder=""
-                        pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                    <input type="email" name="email" id="email-2" placeholder=""
+                       
                         required="required" />
                 </label>
             </div>
             <div class="row">
                 <label for="password-2">
                     Password:
-                    <input type="password" name="password" id="password-2" placeholder=""
-                        pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-                        required="required" />
-                </label>
-            </div>
-            <div class="row">
-                <label for="repassword-2">
-                    re-type Password:
-                    <input type="password" name="password" id="repassword-2" placeholder=""
-                        pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                    <input type="text" name="password" id="password-2" placeholder=""
                         required="required" />
                 </label>
             </div>

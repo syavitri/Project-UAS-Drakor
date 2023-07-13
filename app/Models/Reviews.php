@@ -16,7 +16,7 @@ class Reviews extends Model
         'description',
         'rating',
     ];
-    
+
     public function movies()
     {
         return $this->belongsTo(Movies::class);
@@ -25,5 +25,4 @@ class Reviews extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
 }

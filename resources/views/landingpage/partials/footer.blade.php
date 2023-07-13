@@ -57,3 +57,14 @@
      </div>
  </footer>
  <!-- end of footer v2 section-->
+{{-- alert success --}}
+<script>
+    var success = "{{ session('success') }}";
+    if (success) {
+        alert(success);
+    }
+    var error = "{{ session('error') }}";
+    if (error) {
+        alert(error);
+    }
+</script>
